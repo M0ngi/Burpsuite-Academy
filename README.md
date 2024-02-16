@@ -280,5 +280,5 @@ The url is: `https://0adc00640432edf18375796b005b0089.web-security-academy.net/i
 Well, a jucy spot for path traversal. We try to read `/etc/passwd`:
 
 <p align="center">
-  <img width=500 height=500 src="/img/img9.png"><br/>
+  <img width=550 height=500 src="/img/img9.png"><br/>
 </p>
