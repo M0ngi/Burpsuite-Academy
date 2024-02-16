@@ -80,7 +80,7 @@ Cleaning it up a little:
   <img src="/img/img3.png"><br/>
 </p>
 
-For a CSRF, we can create a form with 1 input, `email`, that's sent to our lab url. Since there's no CSRF tokens, if we host this url in a website & send the url to a victim, this will successfully change their email.
+For a CSRF, we can create a form with 1 input, `email`, that's sent to our lab url. Since there's no CSRF tokens, if we host this url in a website & send the url to a victim, this will successfully change their email. (The browser will attach the required cookies for the request)
 
 Our form:
 
