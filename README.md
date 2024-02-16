@@ -258,3 +258,27 @@ We try enumerating on `productId` & `storeId` fields, we can add `;sleep 5;` in 
 <p align="center">
   <img src="/img/img7.png"><br/>
 </p>
+
+## Path Traversal:
+
+### Lab: File path traversal, simple case
+
+```
+This lab contains a path traversal vulnerability in the display of product images.
+
+To solve the lab, retrieve the contents of the /etc/passwd file. 
+```
+
+Looking at how the images are displayed:
+
+<p align="center">
+  <img src="/img/img8.png"><br/>
+</p>
+
+The url is: `https://0adc00640432edf18375796b005b0089.web-security-academy.net/image?filename=29.jpg`
+
+Well, a jucy spot for path traversal. We try to read `/etc/passwd`:
+
+<p align="center">
+  <img width=500 height=500 src="/img/img9.png"><br/>
+</p>
