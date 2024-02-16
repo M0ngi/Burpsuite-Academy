@@ -363,3 +363,21 @@ We see that our username `username` is sent in the requet. We try to change it t
 </p>
 
 Changed!
+
+## Information disclosure:
+
+### Lab: Information disclosure in error messages
+
+**Description**:
+
+```
+This lab's verbose error messages reveal that it is using a vulnerable version of a third-party framework. To solve the lab, obtain and submit the version number of this framework. 
+```
+
+Opening a product's with an invalid id, we get an internal server error & a stack trace:
+
+<p align="center">
+  <img width=700 height=300 src="/img/img13.png"><br/>
+</p>
+
+At the end, we see that the server is running on `Apache Struts 2 2.3.31`.
