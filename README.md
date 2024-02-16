@@ -359,7 +359,7 @@ temp-forgot-password-token=6lvbwhs5szb626p8y6pbr3xw0sx39oda&username=wiener&new-
 We see that our username `username` is sent in the requet. We try to change it to `carlos`:
 
 <p align="center">
-  <img width=550 height=200 src="/img/img12.png"><br/>
+  <img width=700 height=200 src="/img/img12.png"><br/>
 </p>
 
 Changed!
