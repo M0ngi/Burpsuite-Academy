@@ -223,3 +223,38 @@ Final payload:
         </storeId>
     </stockCheck>
 ```
+
+## Command Injection:
+
+### Lab: OS command injection, simple case
+
+**Description**:
+
+```
+This lab contains an OS command injection vulnerability in the product stock checker.
+
+The application executes a shell command containing user-supplied product and store IDs, and returns the raw output from the command in its response.
+
+To solve the lab, execute the whoami command to determine the name of the current user
+```
+
+A simple command injection. Request to verify product stock:
+
+```http
+POST /product/stock HTTP/2
+Host: 0a3800430303e672841aaf7d004d0067.web-security-academy.net
+Cookie: session=Qs1qkEkyO7uSBmxrKCOrm8DWeJbgjsXi
+Content-Length: 32
+Content-Type: application/x-www-form-urlencoded
+Accept: */*
+
+productId=2&storeId=1
+```
+
+We try enumerating on `productId` & `storeId` fields, we can add `;sleep 5;` in each field to verify whether or not it's being executed.
+
+`storeId` results in the response being delayed, so, we switch to `whoami` & send:
+
+<p align="center">
+  <img src="/img/img7.png"><br/>
+</p>
