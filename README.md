@@ -71,7 +71,7 @@ After logging in, we can change our own email address:
 First things first, we examine the request sent to update our email:
 
 <p align="center">
-  <img src="/img/img2.png"><br/>
+  <img width=400 height=400 src="/img/img2.png"><br/>
 </p>
 
 Cleaning it up a little:
