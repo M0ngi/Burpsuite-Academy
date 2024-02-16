@@ -28,7 +28,10 @@ This alert will be executed to anyone that opens the post details later on.
 
 ### Lab: DOM XSS in document.write sink using source location.search
 
-**Description**: This lab contains a DOM-based cross-site scripting vulnerability in the search query tracking functionality. It uses the JavaScript document.write function, which writes data out to the page. The document.write function is called with data from location.search, which you can control using the website URL.
+**Description**: 
+```
+This lab contains a DOM-based cross-site scripting vulnerability in the search query tracking functionality. It uses the JavaScript document.write function, which writes data out to the page. The document.write function is called with data from location.search, which you can control using the website URL.
+```
 
 Examining the page's source code:
 
@@ -45,3 +48,16 @@ Examining the page's source code:
 ```
 
 Well, that's our XSS. We can insert a `">` to break out of the `img` tag then inject our XSS payload. Full payload: `a"><script>alert(1)</script>`
+
+## CSRF
+
+### Lab: CSRF vulnerability with no defenses
+
+**Description**: 
+```
+ This lab's email change functionality is vulnerable to CSRF.
+
+To solve the lab, craft some HTML that uses a CSRF attack to change the viewer's email address and upload it to your exploit server.
+
+You can log in to your own account using the following credentials: wiener:peter 
+```
